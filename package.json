@@ -1,0 +1,67 @@
+{
+  "name": "react-cron-gen",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/cjs/index.cjs.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/index.d.ts",
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "package.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build:types": "tsc",
+    "build:module": "rollup -c --bundleConfigAsCjs",
+    "build": "rimraf dist && pnpm build:types && pnpm build:module",
+    "test": "vitest",
+    "commit": "cz"
+  },
+  "keywords": [],
+  "author": "Ítalo Maio <italomaio@gmail.com> (https://github.com/italomaio)",
+  "license": "MIT",
+  "packageManager": "pnpm@10.10.0",
+  "peerDependencies": {
+    "@radix-ui/react-select": ">=2.2.5",
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "devDependencies": {
+    "@rollup/plugin-alias": "^5.1.1",
+    "@rollup/plugin-commonjs": "^28.0.6",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@svgr/rollup": "^8.1.0",
+    "@swc/core": "^1.12.9",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "autoprefixer": "^10.4.21",
+    "cz-conventional-changelog": "^3.3.0",
+    "postcss": "^8.5.6",
+    "rimraf": "^6.0.1",
+    "rollup": "^4.44.1",
+    "rollup-plugin-dts": "^6.2.1",
+    "rollup-plugin-dts-path-alias": "^0.0.3",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-preserve-directives": "^0.4.0",
+    "rollup-plugin-preserve-use-client": "^3.0.1",
+    "rollup-plugin-swc3": "^0.12.1",
+    "semantic-release": "^24.2.7",
+    "vitest": "^3.2.4"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.3.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
