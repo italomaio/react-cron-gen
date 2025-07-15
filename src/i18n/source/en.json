@@ -1,0 +1,38 @@
+{
+  "months": [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ],
+  "weekDays": [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday"
+  ],
+  "frequencies": {
+    "minutely": "Minutely",
+    "hourly": "Hourly",
+    "daily": "Daily",
+    "weekly": "Weekly",
+    "monthly": "Monthly"
+  },
+  "frequency": "Frequency",
+  "every": "Every",
+  "day": "Day",
+  "week": "Week",
+  "month": "Month",
+  "year": "Year"
+}
