@@ -1,0 +1,243 @@
+:root {
+  --input-border: #e5e7eb;
+  --ring: gray;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.95);
+  } /* zoom-out-95 para o estado inicial de zoom */
+  to {
+    transform: scale(1);
+  } /* zoom-in-95 para o estado final de zoom */
+}
+
+@keyframes zoomOut {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0.95);
+  } /* zoom-out-95 */
+}
+
+@keyframes slideInFromTop {
+  from {
+    transform: translateY(-0.5rem);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInFromBottom {
+  from {
+    transform: translateY(0.5rem);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-0.5rem);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(0.5rem);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.react-cron-gen__select-trigger {
+  background-color: white;
+  border: 1px solid var(--input-border);
+  border-radius: 0.375rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  display: flex;
+  gap: 1rem;
+  font-size: 0.875rem;
+  font-weight: 300;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  cursor: pointer;
+  width: 11.5rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.react-cron-gen__select-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.125rem;
+  padding: 0;
+  margin-top: 2px;
+  padding: 0.25rem;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  max-height: 15rem;
+  overflow-y: scroll;
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
+  will-change: opacity, transform;
+}
+
+.react-cron-gen__select-content::-webkit-scrollbar {
+  display: none;
+}
+
+.react-cron-gen__select-content > div[data-radix-select-viewport] {
+  padding: 8px !important;
+}
+
+.react-cron-gen__select-content[data-state="open"] {
+  animation: fadeIn 150ms ease-out forwards, zoomIn 150ms ease-out forwards;
+}
+
+.react-cron-gen__select-content[data-state="closed"] {
+  animation: fadeOut 150ms ease-out forwards, zoomOut 150ms ease-out forwards;
+}
+
+.react-cron-gen__select-content[data-state="open"][data-side="bottom"] {
+  animation: slideInFromTop 150ms ease-out forwards;
+}
+
+.react-cron-gen__select-content[data-state="open"][data-side="top"] {
+  animation: slideInFromBottom 150ms ease-out forwards;
+}
+
+.react-cron-gen__select-content[data-state="open"][data-side="right"] {
+  animation: slideInFromLeft 150ms ease-out forwards;
+}
+
+.react-cron-gen__select-content[data-state="open"][data-side="left"] {
+  animation: slideInFromRight 150ms ease-out forwards;
+}
+
+.react-cron-gen__select-content[data-state="open"] {
+  opacity: 1;
+  transform: scale(1) translateX(0) translateY(0);
+}
+
+.react-cron-gen__select-content[data-state="closed"] {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+.react-cron-gen__select-item {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  margin-left: 3px;
+  margin-right: 3px;
+  background-color: transparent;
+  border-radius: 0.125rem;
+  min-width: 9.5rem;
+  font-size: 0.875rem;
+  font-weight: 300;
+  position: relative;
+
+  transition: all 150ms ease-in-out;
+}
+
+.react-cron-gen__select-item[data-state="checked"],
+.react-cron-gen__select-item[data-highlighted],
+.react-cron-gen__select-item:hover {
+  background-color: rgb(245, 245, 245);
+}
+
+.react-cron-gen__select-item[data-state="checked"]::after {
+  content: "✓";
+  display: block;
+  position: absolute;
+  right: 0.5rem;
+  bottom: 5px;
+  z-index: 999;
+  opacity: 0.5;
+}
+
+.react-cron-gen__select-item[data-highlighted] {
+  outline: auto;
+  outline-color: rgb(56, 56, 56);
+  outline-offset: 1px;
+  outline-style: auto;
+  outline-width: 2px;
+  z-index: 998;
+}
+
+.react-cron-gen__input {
+  display: flex;
+  height: 2.55rem;
+  /* width: 100%; */
+  border-radius: 0.375rem;
+  border: 1px solid var(--input-border);
+  background-color: transparent;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #374151;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+}
+
+.react-cron-gen__input::file-selector-button {
+  border: 0;
+  background-color: transparent;
+  font-size: 0.875rem; /* file:text-sm */
+  font-weight: 500; /* file:font-medium */
+  color: var(--foreground); /* file:text-foreground */
+}
+
+.react-cron-gen__input::placeholder {
+  color: var(--muted-foreground); /* placeholder:text-muted-foreground */
+}
+
+.react-cron-gen__input:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--ring); /* focus-visible:ring-1 and ring-ring */
+}
+
+.react-cron-gen__input:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+@media (min-width: 768px) {
+  .react-cron-gen__input {
+    font-size: 0.875rem;
+  }
+}
