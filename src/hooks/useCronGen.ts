@@ -65,7 +65,7 @@ const useCronGen = ({
         return {
           ...prev,
           values,
-          expression: formatter.format(values),
+          expression: formatter.format(values, frequency),
         };
       });
     },

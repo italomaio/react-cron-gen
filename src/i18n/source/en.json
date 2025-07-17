@@ -34,5 +34,15 @@
   "day": "Day",
   "week": "Week",
   "month": "Month",
-  "year": "Year"
+  "year": "Year",
+  "minutes": "Minutes",
+  "hours": "Hours",
+  "select": "Select",
+  "weekDay": "Week day",
+  "monthDay": "Month day",
+  "selectFrequency": "Select frequency",
+  "selectDayOfMonth": "Select months day",
+  "selectDayOfWeek": "Select week day",
+  "fillMinutes": "Fill minutes",
+  "fillHours": "Fill hours"
 }

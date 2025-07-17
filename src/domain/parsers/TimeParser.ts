@@ -4,8 +4,6 @@ export class TimeParser {
   static parse(value: string): TimeParserOutput | null {
     const parts = value.split(":");
 
-    // if (parts.length !== 2) return null;
-
     const [h, m] = parts;
     if (!/^\d{1,2}$/.test(h) || !/^\d{1,2}$/.test(m)) return null;
 
