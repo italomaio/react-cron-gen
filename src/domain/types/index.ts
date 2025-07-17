@@ -33,4 +33,14 @@ export type Locale = {
   week: string;
   month: string;
   year: string;
+  minutes: string;
+  hours: string;
+  select: string;
+  weekDay: string;
+  monthDay: string;
+  selectFrequency: string;
+  selectDayOfMonth: string;
+  selectDayOfWeek: string;
+  fillMinutes: string;
+  fillHours: string;
 };

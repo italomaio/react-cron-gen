@@ -1,8 +1,9 @@
-import { forwardRef, ReactNode } from "react";
+import React, { forwardRef, ReactNode } from "react";
 import { classPrefix, cn } from "@/utils";
 
 import ChevronDown from "@/assets/chevron-down.svg";
 import * as RadixSelect from "@radix-ui/react-select";
+import type { SelectProps as RadixSelectProps } from "@radix-ui/react-select";
 
 export type SelectClasses = {
   trigger: string;
@@ -10,14 +11,15 @@ export type SelectClasses = {
   item: string;
 };
 
-type SelectProps = RadixSelect.SelectProps & {
+export type SelectProps = {
   items: { label: string; value: string }[];
   label?: string;
   placeholder?: string;
   icon?: ReactNode;
   classes?: SelectClasses;
   style?: React.CSSProperties;
-};
+} & RadixSelectProps &
+  React.ComponentPropsWithoutRef<"button">;
 
 const defaultClasses: SelectClasses = {
   content: "",
@@ -25,7 +27,7 @@ const defaultClasses: SelectClasses = {
   trigger: "",
 };
 
-const Select: React.FC<SelectProps> = forwardRef<
+const Select: React.ForwardRefExoticComponent<SelectProps> = forwardRef<
   React.ComponentRef<typeof RadixSelect.Trigger>,
   SelectProps
 >(
@@ -33,12 +35,13 @@ const Select: React.FC<SelectProps> = forwardRef<
     {
       items,
       icon,
-      placeholder = "Select an option",
-      classes = defaultClasses,
-      onValueChange,
       value,
       style,
       disabled,
+      onValueChange,
+      placeholder = "Select an option",
+      classes = defaultClasses,
+      ...rest
     },
     ref
   ) => (
@@ -48,9 +51,10 @@ const Select: React.FC<SelectProps> = forwardRef<
         className={cn(classPrefix("select-trigger"), classes.trigger)}
         style={style}
         disabled={disabled}
+        {...rest}
       >
         <RadixSelect.Value placeholder={placeholder} />
-        <RadixSelect.Icon asChild>
+        <RadixSelect.Icon>
           {icon ?? (
             <ChevronDown style={{ width: 8, height: 8, opacity: 0.5 }} />
           )}
@@ -69,6 +73,7 @@ const Select: React.FC<SelectProps> = forwardRef<
                 key={item.value}
                 value={item.value}
                 className={cn(classPrefix("select-item"), classes.trigger)}
+                aria-label={item.label}
               >
                 <RadixSelect.ItemText>{item.label}</RadixSelect.ItemText>
                 <RadixSelect.ItemIndicator />
@@ -81,5 +86,7 @@ const Select: React.FC<SelectProps> = forwardRef<
     </RadixSelect.Root>
   )
 );
+
+Select.displayName = "Select";
 
 export default Select;

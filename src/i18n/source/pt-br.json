@@ -23,8 +23,8 @@
     "Sábado"
   ],
   "frequencies": {
-    "minutely": "A cada minuto",
-    "hourly": "A cada hora",
+    "minutely": "A cada x minuto(s)",
+    "hourly": "A cada x hora(s)",
     "daily": "Diariamente",
     "weekly": "Semanalmente",
     "monthly": "Mensalmente"
@@ -34,5 +34,16 @@
   "day": "Dia",
   "week": "Semana",
   "month": "Mês",
-  "year": "Ano"
+  "year": "Ano",
+  "minutes": "Minutos",
+  "hours": "Horas",
+  "select": "Selecione",
+  "weekDay": "Dia da semana",
+  "monthDay": "Dia do mês",
+  "selectFrequency": "Selecione a frequência",
+  "selectMonth": "Selecione o mês",
+  "selectDayOfMonth": "Selecione o dia do mês",
+  "selectDayOfWeek": "Selecione o dia da semana",
+  "fillMinutes": "Preencha os minutos",
+  "fillHours": "Preencha as horas"
 }

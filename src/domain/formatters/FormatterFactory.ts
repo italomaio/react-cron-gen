@@ -4,6 +4,11 @@ import { UnixFormatter } from "@/domain/formatters/UnixFormatter";
 
 export class FormatterFactory {
   static create(expressionType: ExpressionType): IFormatter {
-    return new UnixFormatter();
+    const mapper: { [key in ExpressionType]: IFormatter } = {
+      unix: new UnixFormatter(),
+      quartz: undefined,
+    };
+
+    return mapper[expressionType];
   }
 }

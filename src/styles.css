@@ -76,7 +76,7 @@
 }
 
 .react-cron-gen__select-trigger {
-  background-color: white;
+  background-color: transparent;
   border: 1px solid var(--input-border);
   border-radius: 0.375rem;
   padding-top: 0.5rem;
@@ -94,11 +94,19 @@
   align-items: center;
 }
 
+.react-cron-gen__select-trigger:disabled {
+  background-color: #eeeeee;
+  border: 1px solid #dddddd;
+  color: gray;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
 .react-cron-gen__select-content {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: white;
+  background-color: transparent;
   border: 1px solid #e5e7eb;
   border-radius: 0.125rem;
   padding: 0;
@@ -111,7 +119,9 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 
-  transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
+  transition:
+    opacity 150ms ease-in-out,
+    transform 150ms ease-in-out;
   will-change: opacity, transform;
 }
 
@@ -124,11 +134,15 @@
 }
 
 .react-cron-gen__select-content[data-state="open"] {
-  animation: fadeIn 150ms ease-out forwards, zoomIn 150ms ease-out forwards;
+  animation:
+    fadeIn 150ms ease-out forwards,
+    zoomIn 150ms ease-out forwards;
 }
 
 .react-cron-gen__select-content[data-state="closed"] {
-  animation: fadeOut 150ms ease-out forwards, zoomOut 150ms ease-out forwards;
+  animation:
+    fadeOut 150ms ease-out forwards,
+    zoomOut 150ms ease-out forwards;
 }
 
 .react-cron-gen__select-content[data-state="open"][data-side="bottom"] {
@@ -211,7 +225,15 @@
   font-weight: 500;
   color: #374151;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+  transition:
+    color 0.2s,
+    background-color 0.2s,
+    border-color 0.2s;
+}
+
+.react-cron-gen__input:disabled {
+  background-color: rgb(210, 210, 210);
+  cursor: not-allowed;
 }
 
 .react-cron-gen__input::file-selector-button {

@@ -18,6 +18,6 @@
     },
     "types": ["vitest/globals", "@svgr/rollup"]
   },
-  "include": ["src", "src/**/*.d.ts"],
+  "include": ["src", "src/**/*.d.ts", "vitest.setup.ts"],
   "exclude": ["node_modules", "dist"]
 }

@@ -7,4 +7,4 @@ export const getLocaleData = (locale: LocaleType): Locale =>
   ({
     [Locales.PT_BR]: pt,
     [Locales.EN_US]: en,
-  }[locale]);
+  })[locale];
