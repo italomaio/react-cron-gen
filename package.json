@@ -28,7 +28,9 @@
     "cron",
     "ui",
     "react-cron",
-    "cron-generator"
+    "cron-generator",
+    "react-component",
+    "react-hook"
   ],
   "author": "Ítalo Maio <italomaio@gmail.com> (https://github.com/italomaio)",
   "repository": {
