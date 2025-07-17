@@ -23,8 +23,17 @@
     "test:coverage": "vitest --coverage",
     "commit": "cz"
   },
-  "keywords": [],
+  "keywords": [
+    "react",
+    "cron",
+    "ui",
+    "react-cron",
+    "cron-generator"
+  ],
   "author": "Ítalo Maio <italomaio@gmail.com> (https://github.com/italomaio)",
+  "repository": {
+    "url": "https://github.com/italomaio/react-cron-gen"
+  },
   "license": "MIT",
   "packageManager": "pnpm@10.10.0",
   "peerDependencies": {
