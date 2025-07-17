@@ -107,6 +107,9 @@ jobs:
           name: build-output-${{ github.run_id }}
           path: dist/
 
+      - name: Install Dependencies
+        run: pnpm i
+
       - name: Execute Semantic Release
         run: pnpm exec semantic-release
         env:
