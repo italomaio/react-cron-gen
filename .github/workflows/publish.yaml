@@ -16,14 +16,14 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
       - name: Setup Node.js 20
         uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: "pnpm"
-
-      - name: Install pnpm (if not already installed or cached)
-        run: npm install -g pnpm
 
       - name: Install Dependencies with pnpm
         id: pnpm-cache
@@ -32,7 +32,7 @@ jobs:
       - name: Upload pnpm modules as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: node_modules-pnpm-${{ github.run_id }} # Nome único para o artefato
+          name: node_modules-pnpm-${{ github.run_id }}
           path: node_modules/
           retention-days: 1
 
