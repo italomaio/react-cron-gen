@@ -1,5 +1,5 @@
-import { useMemo } from "react";
-import { useCronGen, UseCronGenProps } from "@/hooks";
+import { useEffect, useMemo } from "react";
+import { useCronGen, UseCronGenProps, UseCronGenState } from "@/hooks";
 import { Frequency } from "@/domain/types";
 import { Select, type SelectClasses, Input } from "@/components";
 import { monthDays } from "@/utils";
@@ -9,13 +9,16 @@ import { TimeParserOutput } from "@/domain/types/parsers";
 export type CronGronProps = Pick<UseCronGenProps, "locale" | "type"> & {
   classes?: {
     select?: SelectClasses;
+    input?: string;
   };
+  onValueChange: (values: UseCronGenState) => void;
 };
 
 const CronGen: React.FC<CronGronProps> = ({
   classes,
   locale = "en-US",
   type = "unix",
+  onValueChange,
 }) => {
   const { setField, setFrequency, state, data, frequency } = useCronGen({
     locale,
@@ -68,6 +71,10 @@ const CronGen: React.FC<CronGronProps> = ({
     });
   }, [frequency, state]);
 
+  useEffect(() => {
+    onValueChange(state);
+  }, [state]);
+
   return (
     <div
       style={{
@@ -97,6 +104,7 @@ const CronGen: React.FC<CronGronProps> = ({
             placeholder={data.minutes}
             aria-placeholder={data.fillMinutes}
             aria-label={data.minutes}
+            className={classes.input}
           />
         )}
 
@@ -108,6 +116,7 @@ const CronGen: React.FC<CronGronProps> = ({
             placeholder={data.hours}
             aria-placeholder={data.fillHours}
             aria-label={data.hours}
+            className={classes.input}
           />
         )}
 
@@ -163,6 +172,7 @@ const CronGen: React.FC<CronGronProps> = ({
               setField("minute", minute);
               setField("hour", hour);
             }}
+            className={classes.input}
           />
         )}
       </div>
