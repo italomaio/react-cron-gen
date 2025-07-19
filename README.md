@@ -14,41 +14,93 @@ This package supports various Node.js package managers for flexible installation
 
 ```sh
 # Using npm
-npm install @italomaio/react-cron-gen
+npm install react-cron-gen
 
 # Using pnpm
-pnpm install @italomaio/react-cron-gen
+pnpm install react-cron-gen
 
 # Using Yarn
-yarn add @italomaio/react-cron-gen
+yarn add react-cron-gen
 ```
 
 @radix-ui/react-select is needed to render UI from CronGen component.
 
 ### Usage
 
-Once installed, you can import and use the `CronGen` component in your React application:
+Once installed, you can import and use the `useCronGen` hook or `CronGen` component in your React application:
+
+### useCronGen hook
+
+It provides methods to set singular fields, format cron expression and i18n objects to use in your own UI.
 
 ```tsx
-const { state, setField, setFrequency } = useCronGen({
+import { useCronGen } from 'react-cron-gen';
+
+const { state, data, setField, setFrequency } = useCronGen({
   type: "unix",
   locale: "pt-BR",
 });
 
-<input onChange={e => setField('hour', e.target.value)}>
+// Formatted expression
+<input value={state.expression} />
+
+// Index starts at 0 but cron experession starts from 1 then you should increase index
+<select onChange={e => setField('month', e.target.value)}>
+    {data.months.map((value, index) => (
+        <option key={value} value={(index + 1).toString()}>
+            {value}
+        </option>
+    )}
+</select>
+```
+
+### CronGen component
+
+It provides a production ready UI component. You could customize fields using css just by referencing classes in your CSS File.
+
+```css
+.react-cron-gen__select-trigger,
+.react-cron-gen__select-content,
+.react-cron-gen__select-item,
+.react-cron-gen__input {
+    #CSS properties
+}
+```
+
+Or by passing your custom classes to **classes** object. You can make use of tailwind classes too like:
+
+```js
+classes: {
+  select: {
+    trigger: "h-10 bg-gray-500 etc";
+  }
+}
+```
+
+Or even if you want use the default style you should import css file from react-cron-gen
+
+```ts
+import "react-cron-gen/dist/styles.css";
+```
+
+```tsx
+<CronGen
+  locale="pt-BR"
+  type="unix"
+  onChangeValue={(values) => console.log(values)}
+/>
 ```
 
 ### Props
 
 The `CronGen` component accepts the following props:
 
-| Prop       | Type                     | Required | Description                                                   | Default   |
-| :--------- | :----------------------- | :------- | :------------------------------------------------------------ | :-------- |
-| `classes`  | `object`                 | No       | CSS classes for styling various parts of the component.       | `{}`      |
-| `locale`   | `string`                 | No       | Sets the language for the component (e.g., 'en-US', 'pt-BR'). | `'en-US'` |
-| `type`     | `'unix' \| 'quartz'`     | No       | Specifies the type of cron expression to generate.            | `'unix'`  |
-| `onChange` | `(cron: string) => void` | Yes      | Callback function triggered when the cron expression changes. | `(N/A)`   |
-| `value`    | `string`                 | No       | Initial cron expression to display.                           | `''`      |
+| Prop            | Type                                | Required | Description                                                   | Default   |
+| :-------------- | :---------------------------------- | :------- | :------------------------------------------------------------ | :-------- |
+| `classes`       | `object`                            | No       | CSS classes for styling various parts of the component.       | `{}`      |
+| `locale`        | `'pt-BR' \| 'en-US'`                | No       | Sets the language for the component (e.g., 'en-US', 'pt-BR'). | `'en-US'` |
+| `type`          | `'unix' \| 'quartz'`                | No       | Specifies the type of cron expression to generate.            | `'unix'`  |
+| `onChangeValue` | `(values: UseCronGenState) => void` | Yes      | Callback function triggered when the cron expression changes. | `(N/A)`   |
 
 ## License
 
