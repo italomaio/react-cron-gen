@@ -1,3 +1,6 @@
+// For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
+import storybook from "eslint-plugin-storybook";
+
 import js from "@eslint/js";
 import globals from "globals";
 import tseslint from "typescript-eslint";
@@ -15,7 +18,7 @@ export default defineConfig([
     languageOptions: { globals: globals.browser },
   },
   {
-    ignores: ["dist/", "coverage/"],
+    ignores: ["dist/", "coverage/", "!.storybook", "storybook-static"],
   },
   tseslint.configs.recommended,
   pluginReact.configs.flat.recommended,
@@ -30,6 +33,16 @@ export default defineConfig([
       "react/react-in-jsx-scope": "off",
       "react/jsx-uses-react": "off",
       "react/prop-types": "off",
+    },
+  },
+  ...storybook.configs["flat/recommended"],
+  {
+    files: ["**/*.stories.@(ts|tsx|js|jsx|mjs|cjs)"],
+    rules: {
+      // example of overriding a rule
+      "storybook/hierarchy-separator": "error",
+      // example of disabling a rule
+      "storybook/default-exports": "off",
     },
   },
 ]);
