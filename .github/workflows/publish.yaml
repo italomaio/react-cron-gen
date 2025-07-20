@@ -145,5 +145,9 @@ jobs:
       - name: Set Git Author
         run: git config --global user.email "italomaio@gmail.com" && git config --global user.name "Italo"
 
-      - name: Update GH Pages
-        run: pnpm storybook:deploy
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./storybook-static
+          publish_branch: gh-pages
