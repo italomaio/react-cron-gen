@@ -73,6 +73,7 @@ const CronGen: React.FC<CronGronProps> = ({
 
   useEffect(() => {
     onValueChange(state);
+    console.log("testing branch ruleset");
   }, [state]);
 
   return (
