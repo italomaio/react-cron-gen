@@ -22,6 +22,7 @@ export default defineConfig([
   },
   tseslint.configs.recommended,
   pluginReact.configs.flat.recommended,
+  storybook.configs["flat/csf"],
   {
     files: ["**/*.{js,jsx,ts,tsx}"],
     settings: {
