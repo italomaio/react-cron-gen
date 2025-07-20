@@ -142,5 +142,8 @@ jobs:
       - name: Build Storybook
         run: pnpm storybook:build
 
+      - name: Set Git Author
+        run: git config --global user.email "italomaio@gmail.com" && git config --global user.name "Italo"
+
       - name: Update GH Pages
         run: pnpm storybook:deploy
