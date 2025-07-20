@@ -5,6 +5,7 @@ import CronGen from "./CronGen";
 
 const mockSetField = vi.fn();
 const mockSetFrequency = vi.fn();
+const mockOnChange = vi.fn();
 
 vi.mock("@/hooks", async (importOriginal) => {
   const mod = await importOriginal<typeof import("@/hooks")>();
@@ -99,6 +100,7 @@ describe("CronGen Component", () => {
   it("should render the frequency selector and change frequency on select", () => {
     render(
       <CronGen
+        onValueChange={mockOnChange}
         classes={{
           select: {
             trigger: "class-trigger",
@@ -119,6 +121,7 @@ describe("CronGen Component", () => {
     fireEvent.change(frequencySelect, { target: { value: "weekly" } });
 
     expect(mockSetFrequency).toHaveBeenCalledWith("weekly");
+    expect(mockOnChange).toHaveBeenCalled();
   });
 
   it("should render only the minute input for 'minutely' frequency", () => {
@@ -127,7 +130,7 @@ describe("CronGen Component", () => {
       frequency: "minutely",
     });
 
-    render(<CronGen locale="pt-BR" type="unix" />);
+    render(<CronGen onValueChange={mockOnChange} locale="pt-BR" type="unix" />);
 
     const minuteInput = screen.getByPlaceholderText("Minutos");
     expect(minuteInput).toBeInTheDocument();
@@ -147,7 +150,7 @@ describe("CronGen Component", () => {
       frequency: "hourly",
     });
 
-    render(<CronGen locale="pt-BR" type="unix" />);
+    render(<CronGen onValueChange={mockOnChange} locale="pt-BR" type="unix" />);
 
     const hourInput = screen.getByPlaceholderText("Horas");
     expect(hourInput).toBeInTheDocument();
@@ -162,7 +165,7 @@ describe("CronGen Component", () => {
       frequency: "daily",
       state: { values: { hour: "14", minute: "30" } },
     });
-    render(<CronGen locale="pt-BR" type="unix" />);
+    render(<CronGen onValueChange={mockOnChange} locale="pt-BR" type="unix" />);
 
     const timeInput = screen.getByDisplayValue("14:30");
     expect(timeInput).toBeInTheDocument();
@@ -180,7 +183,7 @@ describe("CronGen Component", () => {
       frequency: "weekly",
       state: { values: { dayOfWeek: "1", hour: "09", minute: "00" } },
     });
-    render(<CronGen locale="pt-BR" type="unix" />);
+    render(<CronGen onValueChange={mockOnChange} locale="pt-BR" type="unix" />);
 
     const dayOfWeekSelect = screen.getByRole("combobox", {
       name: /dia da semana/i,
@@ -203,7 +206,9 @@ describe("CronGen Component", () => {
         values: { month: "1", dayOfMonth: "15", hour: "10", minute: "20" },
       },
     });
-    const { debug } = render(<CronGen locale="pt-BR" type="unix" />);
+    const { debug } = render(
+      <CronGen onValueChange={mockOnChange} locale="pt-BR" type="unix" />
+    );
     debug();
 
     const monthSelect = screen.getByRole("combobox", { name: "Mês" });

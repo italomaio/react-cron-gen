@@ -73,7 +73,6 @@ const CronGen: React.FC<CronGronProps> = ({
 
   useEffect(() => {
     onValueChange(state);
-    console.log("testing branch ruleset");
   }, [state]);
 
   return (
@@ -105,7 +104,7 @@ const CronGen: React.FC<CronGronProps> = ({
             placeholder={data.minutes}
             aria-placeholder={data.fillMinutes}
             aria-label={data.minutes}
-            className={classes.input}
+            className={classes?.input}
           />
         )}
 
@@ -117,7 +116,7 @@ const CronGen: React.FC<CronGronProps> = ({
             placeholder={data.hours}
             aria-placeholder={data.fillHours}
             aria-label={data.hours}
-            className={classes.input}
+            className={classes?.input}
           />
         )}
 
@@ -173,7 +172,7 @@ const CronGen: React.FC<CronGronProps> = ({
               setField("minute", minute);
               setField("hour", hour);
             }}
-            className={classes.input}
+            className={classes?.input}
           />
         )}
       </div>
