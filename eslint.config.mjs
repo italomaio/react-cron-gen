@@ -18,11 +18,10 @@ export default defineConfig([
     languageOptions: { globals: globals.browser },
   },
   {
-    ignores: ["dist/", "coverage/"],
+    ignores: ["dist/", "coverage/", "!.storybook", "storybook-static"],
   },
   tseslint.configs.recommended,
   pluginReact.configs.flat.recommended,
-  storybook.configs["flat/csf"],
   {
     files: ["**/*.{js,jsx,ts,tsx}"],
     settings: {
@@ -34,6 +33,16 @@ export default defineConfig([
       "react/react-in-jsx-scope": "off",
       "react/jsx-uses-react": "off",
       "react/prop-types": "off",
+    },
+  },
+  ...storybook.configs["flat/recommended"],
+  {
+    files: ["**/*.stories.@(ts|tsx|js|jsx|mjs|cjs)"],
+    rules: {
+      // example of overriding a rule
+      "storybook/hierarchy-separator": "error",
+      // example of disabling a rule
+      "storybook/default-exports": "off",
     },
   },
 ]);
