@@ -12,10 +12,9 @@
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "lib": ["dom", "dom.iterable", "esnext"],
-    "baseUrl": "./",
-    "ignoreDeprecations": "5.0",
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"]
     },
     "types": ["vitest/globals", "@svgr/rollup"]
   },
