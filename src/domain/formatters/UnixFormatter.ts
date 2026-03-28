@@ -72,6 +72,9 @@ export class UnixFormatter implements IFormatter {
     if (!value || value === "*") {
       return undefined;
     }
+    if (value.startsWith("*/")) {
+      return value.slice(2);
+    }
     return value;
   }
 

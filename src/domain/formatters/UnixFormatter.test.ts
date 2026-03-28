@@ -47,14 +47,14 @@ describe("UnixFormatter", () => {
       const result = formatter.parse("*/15 * * * *");
       expect(result).not.toBeNull();
       expect(result?.frequency).toBe("minutely");
-      expect(result?.values.minute).toBe("*/15");
+      expect(result?.values.minute).toBe("15");
     });
 
     test("should parse hourly expression", () => {
       const result = formatter.parse("0 */4 * * *");
       expect(result).not.toBeNull();
       expect(result?.frequency).toBe("hourly");
-      expect(result?.values.hour).toBe("*/4");
+      expect(result?.values.hour).toBe("4");
     });
 
     test("should parse daily expression with time", () => {
