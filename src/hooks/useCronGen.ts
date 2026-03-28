@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { getLocaleData } from "@/i18n/locale";
 import { FormatterFactory } from "@/domain/formatters/FormatterFactory";
 import { IFormatter } from "@/domain/interfaces/IFormatter";
@@ -13,8 +13,9 @@ import {
 } from "@/domain/types";
 
 export type UseCronGenProps = {
-  type: ExpressionType;
-  locale: LocaleType;
+  type?: ExpressionType;
+  locale?: LocaleType;
+  defaultValue?: string;
 };
 
 export type UseCronGenState = {
@@ -31,7 +32,7 @@ export type UseCronGenResult = {
   setFrequency: (value: Frequency) => void;
 };
 
-const defaultValues: Fields = {
+const defaultFields: Fields = {
   dayOfMonth: undefined,
   hour: undefined,
   dayOfWeek: undefined,
@@ -41,19 +42,47 @@ const defaultValues: Fields = {
   year: undefined,
 };
 
+const getInitialState = (
+  formatter: IFormatter,
+  defaultValue?: string
+): UseCronGenState => {
+  if (!defaultValue) {
+    return {
+      expression: "",
+      frequency: "hourly",
+      values: defaultFields,
+    };
+  }
+
+  const parsed = formatter.parse(defaultValue);
+
+  if (!parsed) {
+    return {
+      expression: "",
+      frequency: "hourly",
+      values: defaultFields,
+    };
+  }
+
+  return {
+    expression: defaultValue,
+    frequency: parsed.frequency,
+    values: parsed.values,
+  };
+};
+
 const useCronGen = ({
   type = "unix",
   locale = "en-US",
+  defaultValue,
 }: UseCronGenProps): UseCronGenResult => {
-  const [state, setState] = useState<UseCronGenState>({
-    expression: "",
-    frequency: "hourly",
-    values: defaultValues,
-  });
-
   const formatter: IFormatter = useMemo(
     () => FormatterFactory.create(type),
     [type]
+  );
+
+  const [state, setState] = useState<UseCronGenState>(() =>
+    getInitialState(formatter, defaultValue)
   );
 
   const setField = useCallback(
@@ -65,11 +94,11 @@ const useCronGen = ({
         return {
           ...prev,
           values,
-          expression: formatter.format(values, frequency),
+          expression: formatter.format(values, prev.frequency),
         };
       });
     },
-    [state.values]
+    [formatter]
   );
 
   const setFrequency = useCallback(
@@ -77,10 +106,10 @@ const useCronGen = ({
       setState(() => ({
         frequency,
         values: {},
-        expression: formatter.format({}),
+        expression: formatter.format({}, frequency),
       }));
     },
-    [state]
+    [formatter]
   );
 
   const data: Locale = useMemo(() => getLocaleData(locale), [locale]);
@@ -89,11 +118,6 @@ const useCronGen = ({
     () => state.frequency,
     [state.frequency]
   );
-
-  useEffect(() => {
-    console.count("useCronGen Count: ");
-    console.log("useCronGen State: ", state);
-  }, [state]);
 
   return {
     data,

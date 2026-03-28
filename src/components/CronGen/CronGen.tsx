@@ -6,7 +6,10 @@ import { monthDays } from "@/utils";
 import { TimeParser } from "@/domain/parsers/TimeParser";
 import { TimeParserOutput } from "@/domain/types/parsers";
 
-export type CronGronProps = Pick<UseCronGenProps, "locale" | "type"> & {
+export type CronGronProps = Pick<
+  UseCronGenProps,
+  "locale" | "type" | "defaultValue"
+> & {
   classes?: {
     select?: SelectClasses;
     input?: string;
@@ -18,11 +21,13 @@ const CronGen: React.FC<CronGronProps> = ({
   classes,
   locale = "en-US",
   type = "unix",
+  defaultValue,
   onValueChange,
 }) => {
   const { setField, setFrequency, state, data, frequency } = useCronGen({
     locale,
     type,
+    defaultValue,
   });
 
   const frequenciesItems = useMemo(
