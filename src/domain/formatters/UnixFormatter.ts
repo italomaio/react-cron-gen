@@ -25,7 +25,9 @@ export class UnixFormatter implements IFormatter {
     return [
       frequency === "minutely"
         ? `*/${fieldsNotNulled.minute}`
-        : fieldsNotNulled.minute,
+        : frequency === "hourly"
+          ? "0"
+          : fieldsNotNulled.minute,
 
       frequency === "hourly"
         ? `*/${fieldsNotNulled.hour}`

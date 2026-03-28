@@ -24,7 +24,7 @@ describe("UnixFormatter", () => {
   test("Should return hourly cron expression", () => {
     const formatter = new UnixFormatter();
     expect(formatter.format({ ...fields, hour: "4" }, "hourly")).toEqual(
-      "* */4 * * *"
+      "0 */4 * * *"
     );
   });
 });
