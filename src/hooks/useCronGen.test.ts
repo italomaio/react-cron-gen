@@ -181,4 +181,66 @@ describe("useCronGen Hook", () => {
     expect(result.current.frequency).toBe("hourly");
     expect(result.current.state.expression).toBe("");
   });
+
+  it("should parse step values (*/X) correctly from defaultValue", () => {
+    mockParse.mockReturnValueOnce({
+      values: { minute: "5", hour: "2" },
+      frequency: "hourly" as Frequency,
+    });
+
+    const { result } = renderHook(() =>
+      useCronGen({ type: "unix", defaultValue: "0 */2 * * *" })
+    );
+
+    expect(result.current.frequency).toBe("hourly");
+    expect(result.current.state.values?.minute).toBe("5");
+    expect(result.current.state.values?.hour).toBe("2");
+  });
+
+  it("should parse minutely step value correctly", () => {
+    mockParse.mockReturnValueOnce({
+      values: { minute: "15" },
+      frequency: "minutely" as Frequency,
+    });
+
+    const { result } = renderHook(() =>
+      useCronGen({ type: "unix", defaultValue: "*/15 * * * *" })
+    );
+
+    expect(result.current.frequency).toBe("minutely");
+    expect(result.current.state.values?.minute).toBe("15");
+  });
+
+  it("should parse weekly expression with day of week correctly", () => {
+    mockParse.mockReturnValueOnce({
+      values: { minute: "30", hour: "10", dayOfWeek: "1" },
+      frequency: "weekly" as Frequency,
+    });
+
+    const { result } = renderHook(() =>
+      useCronGen({ type: "unix", defaultValue: "30 10 * * 1" })
+    );
+
+    expect(result.current.frequency).toBe("weekly");
+    expect(result.current.state.values?.minute).toBe("30");
+    expect(result.current.state.values?.hour).toBe("10");
+    expect(result.current.state.values?.dayOfWeek).toBe("1");
+  });
+
+  it("should parse monthly expression with month and dayOfMonth correctly", () => {
+    mockParse.mockReturnValueOnce({
+      values: { minute: "30", hour: "10", month: "6", dayOfMonth: "15" },
+      frequency: "monthly" as Frequency,
+    });
+
+    const { result } = renderHook(() =>
+      useCronGen({ type: "unix", defaultValue: "30 10 15 6 *" })
+    );
+
+    expect(result.current.frequency).toBe("monthly");
+    expect(result.current.state.values?.minute).toBe("30");
+    expect(result.current.state.values?.hour).toBe("10");
+    expect(result.current.state.values?.month).toBe("6");
+    expect(result.current.state.values?.dayOfMonth).toBe("15");
+  });
 });
