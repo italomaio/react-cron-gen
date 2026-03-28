@@ -111,7 +111,7 @@ const CronGen: React.FC<CronGronProps> = ({
         {["hourly"].some((x) => x === frequency) && (
           <Input
             type="number"
-            value={state.values.minute}
+            value={state.values.hour}
             onChange={(e) => setField("hour", e.target.value)}
             placeholder={data.hours}
             aria-placeholder={data.fillHours}
